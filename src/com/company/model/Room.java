@@ -1,8 +1,9 @@
 package com.company.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Room {
+public class Room implements Serializable {
     private String roomName;
     private float price;
     private String status;
@@ -86,5 +87,15 @@ public class Room {
         this.id = id;
     }
 
-
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomName='" + roomName + '\'' +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                ", amountOfBathroom=" + amountOfBathroom +
+                ", getAmountOfBedroom=" + getAmountOfBedroom +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

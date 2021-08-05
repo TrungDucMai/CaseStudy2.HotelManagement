@@ -47,7 +47,7 @@ public class RoomManagement {
     public void showRoomList() throws IOException, ClassNotFoundException {
         roomList = RoomFileManagement.readFile();
         for (int i = 0; i < roomList.size(); i++) {
-            System.out.println(roomList.get(i));
+            System.out.println(roomList.get(i).toString());
         }
     }
 

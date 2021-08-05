@@ -1,8 +1,9 @@
 package com.company.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Bill {
+public class Bill implements Serializable {
     private Room room;
     private LocalDate checkin;
     private LocalDate checkout;

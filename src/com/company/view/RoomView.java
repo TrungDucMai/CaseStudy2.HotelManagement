@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class RoomView {
+public  class  RoomView {
 
     RoomManagement roomManagement = new RoomManagement();
 
@@ -49,7 +49,16 @@ public class RoomView {
         System.out.println("Enter room's status : ");
         Scanner scanner2 = new Scanner(System.in);
         String status = scanner2.nextLine();
-        Room newRoom = new Room(roomName, price, status);
+        System.out.println("Enter amount of bathroom : ");
+        Scanner scanner3 = new Scanner(System.in);
+        double bathroom = scanner3.nextDouble();
+        System.out.println("Enter amount of bedroom : ");
+        Scanner scanner4 = new Scanner(System.in);
+        double bedroom = scanner4.nextDouble();
+        System.out.println("Enter room's ID : ");
+        Scanner scanner5 = new Scanner(System.in);
+        String id = scanner5.nextLine();
+        Room newRoom = new Room(roomName, price, status, bathroom,bedroom,id);
 
         try {
             roomManagement.addNewRoom(newRoom);
@@ -65,6 +74,7 @@ public class RoomView {
         int index = roomManagement.findRoomById(searchId);
 
         System.out.println("Enter room's info : ");
+        System.out.println("Enter room's name");
         Scanner scanner1 = new Scanner(System.in);
         String roomName = scanner1.nextLine();
         System.out.println("Enter room's price : ");
@@ -120,11 +130,6 @@ public class RoomView {
 
         roomManagement.checkRoom(roomName, startTime, endTime);
 
-
-
-
     }
-
-
 
 }

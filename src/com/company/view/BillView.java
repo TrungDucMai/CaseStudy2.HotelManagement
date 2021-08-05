@@ -50,9 +50,6 @@ public class BillView {
         System.out.println("Enter Costumer's name : " );
         Scanner scanner3 = new Scanner(System.in);
         String costumerName = scanner3.nextLine();
-
-
-
     }
 
 
