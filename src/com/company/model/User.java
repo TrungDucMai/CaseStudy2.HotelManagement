@@ -5,20 +5,22 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String account;
     private String passwords;
-    private double phoneNumber;
+    private String phoneNumber;
     private String address;
     private String email;
+    private String name;
     private int age;
 
     public User() {
     }
 
-    public User(String account, String passwords, double phoneNumber, String address, String email, int age) {
+    public User(String account, String passwords, String phoneNumber, String address, String email, String name, int age) {
         this.account = account;
         this.passwords = passwords;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
+        this.name = name;
         this.age = age;
     }
 
@@ -38,11 +40,11 @@ public class User implements Serializable {
         this.passwords = passwords;
     }
 
-    public double getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(double phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -62,11 +64,26 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getAge() {
         return age;
     }
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "account='" + account + '\'' +
+                '}';
     }
 }

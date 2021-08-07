@@ -6,10 +6,11 @@ import com.company.storage.BillFileManagement;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillManagement {
-    private List<Bill> billList;
+    private List<Bill> billList = new ArrayList<>();
     private String billManagerName;
 
     public BillManagement() {
@@ -45,13 +46,25 @@ public class BillManagement {
     public void showBill() throws IOException, ClassNotFoundException {
         billList = BillFileManagement.readFile();
         for (int i = 0; i < billList.size(); i++) {
-            System.out.println(billList.get(i));
+            System.out.println(billList.get(i).toString());
 
         }
+    }
+    public int findBillById (String id){
+        int index = -1;
+        for (int i = 0; i < billList.size(); i++) {
+            if (id.equals(billList.get(i).getBillId())){
+                index = i;
+            }
+        } return index;
     }
 
     public void editBill( int index, Bill newBill) throws IOException {
         billList.set(index, newBill);
+        BillFileManagement.writeFile(billList);
+    }
+    public void deleteBill ( int index ) throws IOException {
+        billList.remove(index);
         BillFileManagement.writeFile(billList);
     }
 }

@@ -8,18 +8,20 @@ public class Main {
 
 
         System.out.println("MENU :");
-        System.out.println("1.Sign in - Sign out.");
+        System.out.println("1.Signed accounts list.");
         System.out.println("2.Room management. ");
         System.out.println("3.Bill management. ");
         System.out.println("0.Exit ");
         Scanner scanner = new Scanner(System.in);
-        int choice = 0;
+        int choice = -1;
         do {
             System.out.println("Your selection : ");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("Working in process");
+                    System.out.println("List of signed account");
+                    UserView userView = new UserView();
+                    userView.formShowUser();
                     break;
                 case 2:
                     System.out.println("1.Show room's list : ");
@@ -27,13 +29,15 @@ public class Main {
                     System.out.println("3.Add more room here : ");
                     System.out.println("4.Change room's info here : ");
                     System.out.println("5.Check room status : ");
+                    System.out.println("6.Delete a room : ");
                     RoomView roomView = new RoomView();
+                    int choice1 = -1;
                     do {
-                        choice = 0;
+
                         System.out.println("your selection : ");
                         Scanner scanner1 = new Scanner(System.in);
-                        choice = scanner1.nextInt();
-                        switch (choice) {
+                        choice1 = scanner1.nextInt();
+                        switch (choice1) {
                             case 1:
                                 roomView.formShowRoomList();
                                 break;
@@ -49,16 +53,40 @@ public class Main {
                             case 5:
                                 roomView.formCheckRoom();
                                 break;
+                            case 6:
+                                roomView.formdeleteRoom();
                         }
-                    } while (choice != 0);
+                    } while (choice1 != 0);
                     break;
                 case 3:
+
                     System.out.println("1.Show bill's list : ");
                     System.out.println("2.Create a new bill : ");
                     System.out.println("3.Change a bill :  ");
-
-
+                    System.out.println("4. delete a bill : ");
+                    BillView billView = new BillView();
+                    int choice2 = -1;
+                    do {
+                        System.out.println("your selection : ");
+                        Scanner scanner2 = new Scanner(System.in);
+                        choice1 = scanner2.nextInt();
+                        switch (choice2) {
+                            case 1:
+                                billView.formShowBill();
+                                break;
+                            case 2:
+                                billView.formAddBill();
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                billView.formdeleteBill();
+                                break;
+                        }
+                    } while (choice2 != 0);
             }
+
+
         } while (choice != 0);
 
     }

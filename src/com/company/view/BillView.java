@@ -1,7 +1,10 @@
 package com.company.view;
 
 import com.company.controller.BillManagement;
+import com.company.controller.RoomManagement;
+import com.company.model.Bill;
 import com.company.model.Room;
+import com.company.storage.RoomFileManagement;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -10,7 +13,7 @@ import java.util.Scanner;
 public class BillView {
     BillManagement billManagement = new BillManagement();
 
-    public void formShowBill (){
+    public void formShowBill() {
         try {
             billManagement.showBill();
         } catch (IOException e) {
@@ -20,10 +23,10 @@ public class BillView {
         }
     }
 
-    public void formAddBill (){
+    public void formAddBill() {
         System.out.println("Enter new bill : ");
         System.out.println("Enter check-in time :");
-        Scanner scanner = new  Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter end day : ");
         int ci_year = scanner.nextInt();
         System.out.println("Enter month : ");
@@ -31,10 +34,10 @@ public class BillView {
         System.out.println("Enter day : ");
         int ci_day = scanner.nextInt();
 
-        LocalDate checkin = LocalDate.of(ci_year,ci_month,ci_day);
+        LocalDate checkin = LocalDate.of(ci_year, ci_month, ci_day);
 
         System.out.println("Enter check-out time :");
-        Scanner scanner1 = new  Scanner(System.in);
+        Scanner scanner1 = new Scanner(System.in);
         System.out.println("Enter end day : ");
         int co_year = scanner1.nextInt();
         System.out.println("Enter month : ");
@@ -47,15 +50,54 @@ public class BillView {
         System.out.println("Enter Staff's name :");
         Scanner scanner2 = new Scanner(System.in);
         String staffName = scanner2.nextLine();
-        System.out.println("Enter Costumer's name : " );
+        System.out.println("Enter Costumer's name : ");
         Scanner scanner3 = new Scanner(System.in);
-        String costumerName = scanner3.nextLine();
+        String customerName = scanner3.nextLine();
+        System.out.println("Enter bill's ID : ");
+        Scanner scanner4 = new Scanner(System.in);
+        String id = scanner4.nextLine();
+
+        Bill newBill = new Bill(checkin, checkout, staffName, customerName, id);
+
+        System.out.println("Enter room's name : ");
+        Scanner scanner5 = new Scanner(System.in);
+        String roomName = scanner5.nextLine();
+        RoomManagement roomManagement = new RoomManagement();
+        Room room = roomManagement.findAvailableRoom(roomName);
+        if (room != null) {
+            newBill.setRoom(room);
+        } else {
+            System.out.println("Cant add the room");
+        }
+
+
+        room.setStatus("Booked");
+        int roomIndex = roomManagement.findRoomById(room.getId());
+        try {
+            roomManagement.editRoom(roomIndex, room);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        float totalPrice = (checkout.toEpochDay() - checkin.toEpochDay()) * room.getPrice();
+        newBill.setTotalPrice(totalPrice);
+
+        try {
+            billManagement.addNewBill(newBill);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void formdeleteBill() {
+        System.out.println("Enter bill's ID : ");
+        Scanner scanner = new Scanner(System.in);
+        String id = scanner.nextLine();
+        int index = billManagement.findBillById(id);
+        try {
+            billManagement.deleteBill(index);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 }
-//    private Room room;
-//    private LocalDate checkin;
-//    private LocalDate checkout;
-//    private String staffName;
-//    private String customerName;

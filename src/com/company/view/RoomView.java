@@ -66,6 +66,17 @@ public  class  RoomView {
             e.printStackTrace();
         }
     }
+    public void formdeleteRoom (){
+        System.out.println("Enter room' ID : ");
+        Scanner scanner = new Scanner(System.in);
+        String id = scanner.nextLine();
+       int index =  roomManagement.findRoomById(id);
+        try {
+            roomManagement.deleteRoom(index);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void formEditRoom() {
         System.out.println("Enter room's ID : ");

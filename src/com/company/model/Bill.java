@@ -4,21 +4,35 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Bill implements Serializable {
-    private Room room;
+
     private LocalDate checkin;
     private LocalDate checkout;
     private String staffName;
     private String customerName;
+    private float totalPrice;
+    private String billId;
+    private Room room;
 
     public Bill() {
     }
 
-    public Bill(Room room, LocalDate checkin, LocalDate checkout, String staffName, String customerName) {
-        this.room = room;
+
+    public Bill(LocalDate checkin, LocalDate checkout, String staffName, String customerName, String billId) {
         this.checkin = checkin;
         this.checkout = checkout;
         this.staffName = staffName;
         this.customerName = customerName;
+        this.billId = billId;
+    }
+
+    public Bill(LocalDate checkin, LocalDate checkout, String staffName, String customerName, float totalPrice, String billId, Room room) {
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.staffName = staffName;
+        this.customerName = customerName;
+        this.totalPrice = totalPrice;
+        this.billId = billId;
+        this.room = room;
     }
 
     public Room getRoom() {
@@ -60,4 +74,34 @@ public class Bill implements Serializable {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
+
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getBillId() {
+        return billId;
+    }
+
+    public void setBillId(String billId) {
+        this.billId = billId;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "room=" + room.getRoomName() +
+                ", checkin=" + checkin +
+                ", checkout=" + checkout +
+                ", staffName='" + staffName + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", billId='" + billId + '\'' +
+                '}';
+    }
 }
+
