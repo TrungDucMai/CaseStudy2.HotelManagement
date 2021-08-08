@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class UserView {
     UserManagement userManagement = new UserManagement();
+    static Validate validate = new Validate();
 
     public void formShowUser() {
         try {
@@ -226,17 +227,20 @@ public class UserView {
 
     }
 
-public static void login (){
-    System.out.println("Account :");
-    Scanner scanner = new Scanner(System.in);
-    String account = scanner.nextLine();
-    System.out.println("Password :");
-    Scanner scanner1 = new Scanner(System.in);
-    String password = scanner1.nextLine();
-    boolean check = Validate.checkLogIn(account, password);
-    if (check){
+    public void login() {
+        System.out.println("Account :");
+        Scanner scanner = new Scanner(System.in);
+        String account = scanner.nextLine();
+        System.out.println("Password :");
+        Scanner scanner1 = new Scanner(System.in);
+        String password = scanner1.nextLine();
 
+        boolean check = Validate.checkLogIn(account, password);
+        if (check = true) {
+            Menu.ManagementMenu();
+        } else {
+            System.out.println("Something is wrong, please try again ");
+
+        }
     }
-
-}
 }

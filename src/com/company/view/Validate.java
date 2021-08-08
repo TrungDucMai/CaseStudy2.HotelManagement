@@ -2,7 +2,10 @@ package com.company.view;
 
 import com.company.controller.UserManagement;
 import com.company.model.User;
+import com.company.storage.UserFileManagement;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -46,8 +49,15 @@ public class Validate {
     }
 
     public static boolean checkLogIn(String account, String password) {
-        UserManagement userManagement = new UserManagement();
-        List<User> userList = userManagement.getUserList();
+//        UserManagement userManagement = new UserManagement();
+        List<User> userList = new ArrayList<>();
+        try {
+            userList = UserFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < userList.size(); i++) {
             if (account.equals(userList.get(i).getAccount()) && password.equals(userList.get(i).getPasswords())) {
                 return true;
