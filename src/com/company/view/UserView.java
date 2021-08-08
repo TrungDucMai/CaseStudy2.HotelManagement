@@ -228,19 +228,21 @@ public class UserView {
     }
 
     public void login() {
-        System.out.println("Account :");
-        Scanner scanner = new Scanner(System.in);
-        String account = scanner.nextLine();
-        System.out.println("Password :");
-        Scanner scanner1 = new Scanner(System.in);
-        String password = scanner1.nextLine();
+        boolean check;
+        do {
+            System.out.println("Account :");
+            Scanner scanner = new Scanner(System.in);
+            String account = scanner.nextLine();
+            System.out.println("Password :");
+            Scanner scanner1 = new Scanner(System.in);
+            String password = scanner1.nextLine();
 
-        boolean check = Validate.checkLogIn(account, password);
-        if (check = true) {
-            Menu.ManagementMenu();
-        } else {
-            System.out.println("Something is wrong, please try again ");
-
-        }
+            check = Validate.checkLogIn(account, password);
+            if (check) {
+                Menu.ManagementMenu();
+            } else {
+                System.out.println("Something is wrong, please try again ");
+            }
+        } while (!check);
     }
 }
