@@ -5,6 +5,26 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("Log in - Sign in :");
+        UserView userView = new UserView();
+        int choice5 = -1;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Your selection : ");
+        System.out.println("1.Log-in");
+        System.out.println("2.Sign-in");
+        System.out.println("0.Exit ");
+        do {
+            switch (choice5) {
+                case 1:
+                    System.out.println("Login to see management options :");
+
+                    break;
+                case 2:
+                    System.out.println("Create a new account here : ");
+                    userView.createNewAccount();
+                    break;
+            }
+        } while (choice5 != 0);
 
 
         System.out.println("MENU :");
@@ -20,7 +40,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("List of signed account");
-                    UserView userView = new UserView();
+
                     userView.formShowUser();
                     break;
                 case 2:

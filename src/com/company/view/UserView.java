@@ -2,12 +2,14 @@ package com.company.view;
 
 import com.company.controller.UserManagement;
 import com.company.model.User;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class UserView {
     UserManagement userManagement = new UserManagement();
-    public void formShowUser(){
+
+    public void formShowUser() {
         try {
             userManagement.showUserList();
         } catch (IOException e) {
@@ -111,7 +113,8 @@ public class UserView {
             e.printStackTrace();
         }
     }
-    public void formdeleteUser(){
+
+    public void formdeleteUser() {
         System.out.println("Enter user's account : ");
         Scanner scanner = new Scanner(System.in);
         String account = scanner.nextLine();
@@ -123,9 +126,10 @@ public class UserView {
             e.printStackTrace();
         }
     }
-    public void formEditUser(){
+
+    public void formEditUser() {
         System.out.println("Enter user's account :");
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String checkaccount = sc.nextLine();
         int index = userManagement.findUserByAccount(checkaccount);
         User user = new User();
@@ -214,11 +218,25 @@ public class UserView {
             }
         } while (!checkAge);
         try {
-            userManagement.editUser(index,user);
+            userManagement.editUser(index, user);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
     }
+
+public static void login (){
+    System.out.println("Account :");
+    Scanner scanner = new Scanner(System.in);
+    String account = scanner.nextLine();
+    System.out.println("Password :");
+    Scanner scanner1 = new Scanner(System.in);
+    String password = scanner1.nextLine();
+    boolean check = Validate.checkLogIn(account, password);
+    if (check){
+
+    }
+
+}
 }

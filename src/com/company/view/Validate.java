@@ -1,5 +1,10 @@
 package com.company.view;
 
+import com.company.controller.UserManagement;
+import com.company.model.User;
+
+import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,16 +21,39 @@ public class Validate {
         return matcher.matches();
     }
 
-    public static boolean isPhoneNumber (String phoneNumber ){
+    public static boolean isPhoneNumber(String phoneNumber) {
         Pattern pattern = Pattern.compile("^[0-9]{10}$");
         Matcher matcher = pattern.matcher(phoneNumber);
         return matcher.matches();
     }
 
-    public static boolean isEmail (String email){
+    public static boolean isEmail(String email) {
         Pattern pattern = Pattern.compile("[A-Za-z0-9]+[A-Za-z0-9]*@gmail\\.com");
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    public static String checkEmpty() {
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String typein = scanner.nextLine();
+            if (typein.trim().isEmpty() != true) {
+                return typein;
+            } else {
+                System.out.println("You haven't type anything. Please retry :  ");
+            }
+        }
+    }
+
+    public static boolean checkLogIn(String account, String password) {
+        UserManagement userManagement = new UserManagement();
+        List<User> userList = userManagement.getUserList();
+        for (int i = 0; i < userList.size(); i++) {
+            if (account.equals(userList.get(i).getAccount()) && password.equals(userList.get(i).getPasswords())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
