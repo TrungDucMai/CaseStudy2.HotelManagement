@@ -2,12 +2,14 @@ package com.company.view;
 
 import com.company.controller.RoomManagement;
 import com.company.model.Room;
-import com.company.model.RoomType;
+import com.company.model.User;
 import com.company.storage.RoomFileManagement;
+import com.company.storage.UserFileManagement;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public  class  RoomView {
@@ -39,6 +41,15 @@ public  class  RoomView {
     }
 
     public void formAddRoom() {
+        List<Room> roomList = new ArrayList<>();
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        roomManagement.setRoomList(roomList);
         System.out.println("Enter new room info : ");
         System.out.println("Enter room's name : ");
         Scanner scanner = new Scanner(System.in);
@@ -67,6 +78,15 @@ public  class  RoomView {
         }
     }
     public void formdeleteRoom (){
+        List<Room> roomList = new ArrayList<>();
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        roomManagement.setRoomList(roomList);
         System.out.println("Enter room' ID : ");
         Scanner scanner = new Scanner(System.in);
         String id = scanner.nextLine();
@@ -79,6 +99,15 @@ public  class  RoomView {
     }
 
     public void formEditRoom() {
+        List<Room> roomList = new ArrayList<>();
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        roomManagement.setRoomList(roomList);
         System.out.println("Enter room's ID : ");
         Scanner scanner = new Scanner(System.in);
         String searchId = scanner.nextLine();

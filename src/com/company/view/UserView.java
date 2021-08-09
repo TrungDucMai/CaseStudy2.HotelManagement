@@ -2,13 +2,16 @@ package com.company.view;
 
 import com.company.controller.UserManagement;
 import com.company.model.User;
+import com.company.storage.UserFileManagement;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserView {
     UserManagement userManagement = new UserManagement();
-    static Validate validate = new Validate();
+
 
     public void formShowUser() {
         try {
@@ -21,6 +24,15 @@ public class UserView {
     }
 
     public void createNewAccount() {
+        List<User> userList = new ArrayList<>();
+        try {
+            userList = UserFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        userManagement.setUserList(userList);
         User user = new User();
         System.out.println("Enter your infomation to sign in :");
         System.out.println("Enter your user's name  :");
@@ -95,9 +107,9 @@ public class UserView {
 
         System.out.println("Enter your age : ");
         Scanner scanner6 = new Scanner(System.in);
-        int age = scanner6.nextInt();
-        boolean checkAge;
+        boolean checkAge = true;
         do {
+            int age = scanner6.nextInt();
             if (age >= 18) {
                 int checkedAge = age;
                 user.setAge(age);
@@ -106,7 +118,7 @@ public class UserView {
             } else {
                 checkAge = false;
             }
-        } while (!checkAge);
+        } while (checkAge = false);
 
         try {
             userManagement.addUser(user);
@@ -116,6 +128,15 @@ public class UserView {
     }
 
     public void formdeleteUser() {
+        List<User> userList = new ArrayList<>();
+        try {
+            userList = UserFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        userManagement.setUserList(userList);
         System.out.println("Enter user's account : ");
         Scanner scanner = new Scanner(System.in);
         String account = scanner.nextLine();
@@ -129,6 +150,16 @@ public class UserView {
     }
 
     public void formEditUser() {
+
+        List<User> userList = new ArrayList<>();
+        try {
+            userList = UserFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        userManagement.setUserList(userList);
         System.out.println("Enter user's account :");
         Scanner sc = new Scanner(System.in);
         String checkaccount = sc.nextLine();

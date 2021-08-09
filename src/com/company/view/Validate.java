@@ -36,17 +36,7 @@ public class Validate {
         return matcher.matches();
     }
 
-    public static String checkEmpty() {
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            String typein = scanner.nextLine();
-            if (typein.trim().isEmpty() != true) {
-                return typein;
-            } else {
-                System.out.println("You haven't type anything. Please retry :  ");
-            }
-        }
-    }
+
 
     public static boolean checkLogIn(String account, String password) {
 //        UserManagement userManagement = new UserManagement();
@@ -64,6 +54,17 @@ public class Validate {
             }
         }
         return false;
+    }
+    public static String checkEmpty() {
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String typein = scanner.nextLine();
+            if (typein.trim().isEmpty() != true) {
+                return typein;
+            } else {
+                System.out.println("You haven't type anything. Please retry :  ");
+            }
+        }
     }
 
 }

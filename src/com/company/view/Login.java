@@ -2,7 +2,7 @@ package com.company.view;
 
 import java.util.Scanner;
 
-public class LoginView {
+public class Login {
     public static void main(String[] args) {
         System.out.println("Log in - Sign in :");
         System.out.println("1.Log-in");
@@ -10,10 +10,10 @@ public class LoginView {
         System.out.println("0.Exit ");
         UserView userView = new UserView();
         int choice = -1;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Your selection : ");
-        choice = sc.nextInt();
         do {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Your selection : ");
+            choice = sc.nextInt();
             switch (choice) {
                 case 1:
                     System.out.println("Login to see management options :");

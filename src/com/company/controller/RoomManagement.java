@@ -1,7 +1,6 @@
 package com.company.controller;
 
 import com.company.model.Room;
-import com.company.model.RoomType;
 import com.company.storage.RoomFileManagement;
 
 import java.io.IOException;
@@ -72,10 +71,10 @@ public class RoomManagement {
         for (int i = 0; i < roomList.size(); i++) {
             if (roomList.get(i).getPrice() >= lowestPrice && roomList.get(i).getPrice() <= highestPrice) {
                 System.out.println(roomList.get(i));
-
-            } else {
-                System.out.println("Can't find any room in the price's range ");
             }
+//            } else {
+//                System.out.println("Can't find any room in the price's range ");
+//            }
         }
     }
 
@@ -90,7 +89,7 @@ public class RoomManagement {
         return index;
     }
 
-    public Room findAvailableRoom(String roomName) {
+    public Room findAvailableRoom(String roomName, List<Room> roomList) {
         Room room = null;
         for (Room r : roomList
         ) {

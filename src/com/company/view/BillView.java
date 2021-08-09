@@ -4,14 +4,19 @@ import com.company.controller.BillManagement;
 import com.company.controller.RoomManagement;
 import com.company.model.Bill;
 import com.company.model.Room;
+import com.company.storage.BillFileManagement;
 import com.company.storage.RoomFileManagement;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BillView {
     BillManagement billManagement = new BillManagement();
+    RoomManagement roomManagement = new RoomManagement();
 
     public void formShowBill() {
         try {
@@ -24,10 +29,28 @@ public class BillView {
     }
 
     public void formAddBill() {
+        List<Bill> billList = new ArrayList<>();
+        try {
+            billList = BillFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        billManagement.setBillList(billList);
+        List<Room> roomList = new ArrayList<>();
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        roomManagement.setRoomList(roomList);
         System.out.println("Enter new bill : ");
         System.out.println("Enter check-in time :");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter end day : ");
+        System.out.println("Enter year : ");
         int ci_year = scanner.nextInt();
         System.out.println("Enter month : ");
         int ci_month = scanner.nextInt();
@@ -38,7 +61,7 @@ public class BillView {
 
         System.out.println("Enter check-out time :");
         Scanner scanner1 = new Scanner(System.in);
-        System.out.println("Enter end day : ");
+        System.out.println("Enter year : ");
         int co_year = scanner1.nextInt();
         System.out.println("Enter month : ");
         int co_month = scanner1.nextInt();
@@ -62,8 +85,8 @@ public class BillView {
         System.out.println("Enter room's name : ");
         Scanner scanner5 = new Scanner(System.in);
         String roomName = scanner5.nextLine();
-        RoomManagement roomManagement = new RoomManagement();
-        Room room = roomManagement.findAvailableRoom(roomName);
+
+        Room room = roomManagement.findAvailableRoom(roomName, roomList);
         if (room != null) {
             newBill.setRoom(room);
         } else {
@@ -89,6 +112,15 @@ public class BillView {
     }
 
     public void formdeleteBill() {
+        List<Bill> billList = new ArrayList<>();
+        try {
+            billList = BillFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        billManagement.setBillList(billList);
         System.out.println("Enter bill's ID : ");
         Scanner scanner = new Scanner(System.in);
         String id = scanner.nextLine();
@@ -101,10 +133,28 @@ public class BillView {
 
     }
     public void formEditBill(){
+        List<Bill> billList = new ArrayList<>();
+        try {
+            billList = BillFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        billManagement.setBillList(billList);
+        List<Room> roomList = new ArrayList<>();
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        roomManagement.setRoomList(roomList);
         System.out.println("Enter new bill : ");
         System.out.println("Enter check-in time :");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter end day : ");
+        System.out.println("Enter year : ");
         int ci_year = scanner.nextInt();
         System.out.println("Enter month : ");
         int ci_month = scanner.nextInt();
@@ -115,7 +165,7 @@ public class BillView {
 
         System.out.println("Enter check-out time :");
         Scanner scanner1 = new Scanner(System.in);
-        System.out.println("Enter end day : ");
+        System.out.println("Enter year : ");
         int co_year = scanner1.nextInt();
         System.out.println("Enter month : ");
         int co_month = scanner1.nextInt();
@@ -139,8 +189,15 @@ public class BillView {
         System.out.println("Enter room's name : ");
         Scanner scanner5 = new Scanner(System.in);
         String roomName = scanner5.nextLine();
-        RoomManagement roomManagement = new RoomManagement();
-        Room room = roomManagement.findAvailableRoom(roomName);
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Room room = roomManagement.findAvailableRoom(roomName, roomList);
         if (room != null) {
             newBill.setRoom(room);
         } else {
