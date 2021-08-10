@@ -1,6 +1,8 @@
 package com.company.controller;
 
+import com.company.model.Bill;
 import com.company.model.Room;
+import com.company.storage.BillFileManagement;
 import com.company.storage.RoomFileManagement;
 
 import java.io.IOException;
@@ -52,16 +54,25 @@ public class RoomManagement {
 
 
     public void checkRoom(String roomName, LocalDate startTime, LocalDate endTime) {
-        BillManagement bill = new BillManagement();
-        for (int i = 0; i < bill.getBillList().size(); i++) {
+        BillManagement billManagement = new BillManagement();
+        List<Bill> billList = new ArrayList<>();
+        try {
+            billList = BillFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        billManagement.setBillList(billList);
+        for (int i = 0; i < billManagement.getBillList().size(); i++) {
 
-            if (roomName.equals(bill.getBillList().get(i).getRoom().getRoomName())) {
-                if (startTime.isBefore(bill.getBillList().get(i).getCheckin()) && endTime.isBefore(bill.getBillList().get(i).getCheckin()) || startTime.isAfter(bill.getBillList().get(i).getCheckout()) && endTime.isAfter(bill.getBillList().get(i).getCheckout())) {
+            if (roomName.equals(billManagement.getBillList().get(i).getRoom().getRoomName())) {
+                if (startTime.isBefore(billManagement.getBillList().get(i).getCheckin()) && endTime.isBefore(billManagement.getBillList().get(i).getCheckin()) || startTime.isAfter(billManagement.getBillList().get(i).getCheckout()) && endTime.isAfter(billManagement.getBillList().get(i).getCheckout())) {
                     System.out.println("The room is empty ");
                 }
 
             } else {
-                System.out.println("The room is not available  from " + bill.getBillList().get(i).getCheckin() + " till " + bill.getBillList().get(i).getCheckout());
+                System.out.println("The room is not available  from " + billManagement.getBillList().get(i).getCheckin() + " till " + billManagement.getBillList().get(i).getCheckout());
             }
         }
 

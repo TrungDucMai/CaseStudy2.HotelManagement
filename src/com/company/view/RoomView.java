@@ -27,7 +27,15 @@ public  class  RoomView {
         }
     }
 
-    public void formSearchRoomByPrice() {
+    public void formSearchRoomByPrice() {  List<Room> roomList = new ArrayList<>();
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        roomManagement.setRoomList(roomList);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter lowest price :");
         float lowestPrice = scanner.nextFloat();
@@ -143,6 +151,15 @@ public  class  RoomView {
         }
     }
     public void formCheckRoom(){
+        List<Room> roomList = new ArrayList<>();
+        try {
+            roomList = RoomFileManagement.readFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        roomManagement.setRoomList(roomList);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter start day : ");
         System.out.println("Enter year : ");
